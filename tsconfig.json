@@ -6,6 +6,12 @@
     // "outDir": "./dist",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "module": "nodenext",
     "target": "esnext",
     "types": [],
