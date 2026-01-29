@@ -1,4 +1,5 @@
 import { PrismaUsersRepository } from "@/repositories/prisma/prismaUsers.repository.js";
+import { UserAlreadyExistsError } from "@/services/errors/userAlreadyExists.error.js";
 import { RegisterService } from "@/services/register.service.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
@@ -18,7 +19,11 @@ export async function registerController(request: FastifyRequest, reply: Fastify
 
         await registerService.execute({ name, email, password });
     } catch (err) {
-        return reply.status(409).send()
+        if (err instanceof UserAlreadyExistsError) {
+            return reply.status(409).send({ message: err.message });
+        }
+
+        return reply.status(500).send(); //TODO: Melhorar isso aqui depois
     }
 
     return reply.status(201).send();
