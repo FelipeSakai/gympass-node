@@ -1,6 +1,6 @@
 import { expect, describe, it, beforeEach } from "vitest";
 import { InMemoryUsersRepository } from "@/repositories/in-memory/inMemoryUser.repository.js";
-import { AuthenticateService } from "./authenticate.js";
+import { AuthenticateService } from "./authenticate.service.js";
 import { hash } from "bcryptjs";
 import { InvalidCredentialsError } from "./errors/invalidCredentialError.js";
 
