@@ -53,7 +53,7 @@ describe('CheckIn Service', () => {
             UserLongitude: -49.6401091,
         })
 
-        expect(() => sut.execute({
+        await expect(() => sut.execute({
             gymId: 'gym-01',
             userId: 'user-01',
             UserLatitude: -27.2092052,
@@ -85,4 +85,28 @@ describe('CheckIn Service', () => {
 
         expect(checkIn.id).toEqual(expect.any(String))
     })
+
+
+    it('should not be able to check in on distant gym', async () => {
+
+        gymRepository.items.push({
+            id: 'gym-02',
+            tittle: 'JavaScript Gym',
+            description: '',
+            phone: '',
+            latitude: new Decimal(-27.4092052),
+            longitude: new Decimal(-49.0001091),
+        })
+
+
+        await expect(() =>
+            sut.execute({
+                gymId: 'gym-02',
+                userId: 'user-01',
+                UserLatitude: -27.2092052,
+                UserLongitude: -49.6401091,
+            }),
+        ).rejects.toBeInstanceOf(Error);
+    })
+
 })
