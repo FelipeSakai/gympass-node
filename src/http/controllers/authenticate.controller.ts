@@ -1,4 +1,4 @@
-import { InvalidCredentialsError } from "@/services/errors/invalidCredentialError.js";
+import { InvalidCredentialsError } from "@/services/errors/invalidCredential.error.js";
 import { makeAuthenticateService } from "@/services/factories/makeAuthenticateService.js";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
