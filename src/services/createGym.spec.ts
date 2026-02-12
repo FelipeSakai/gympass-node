@@ -15,7 +15,7 @@ describe('Create Gym Service', () => {
     it('should be able to create gym', async () => {
 
         const { gym } = await sut.execute({
-            tittle: 'Gym John Doe',
+            title: 'Gym John Doe',
             description: null,
             phone: null,
             latitude: -27.2092052,

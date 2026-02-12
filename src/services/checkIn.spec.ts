@@ -18,7 +18,7 @@ describe('CheckIn Service', () => {
 
         await gymRepository.create({
             id: 'gym-01',
-            tittle: 'JavaScript Gym',
+            title: 'JavaScript Gym',
             description: '',
             phone: '',
             latitude: -27.2092052,
@@ -93,7 +93,7 @@ describe('CheckIn Service', () => {
 
         gymRepository.items.push({
             id: 'gym-02',
-            tittle: 'JavaScript Gym',
+            title: 'JavaScript Gym',
             description: '',
             phone: '',
             latitude: new Decimal(-27.4092052),

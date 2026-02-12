@@ -14,7 +14,7 @@ export class InMemoryGymRepository implements GymsRepository {
     async create(data: Prisma.GymCreateInput): Promise<Gym> {
         const gym = {
             id: data.id ?? randomUUID(),
-            tittle: data.tittle,
+            title: data.title,
             description: data.description ?? null,
             phone: data.phone ?? null,
             latitude: new Prisma.Decimal(data.latitude.toString()),
@@ -23,5 +23,13 @@ export class InMemoryGymRepository implements GymsRepository {
         }
         this.items.push(gym);
         return gym;
+    }
+
+    async searchMany(query: string, page: number) {
+        return this.items.filter(item => {
+            const title = (item as any).title ?? item.title ?? ''
+            return title.includes(query)
+        })
+            .slice((page - 1) * 20, page * 20)
     }
 }

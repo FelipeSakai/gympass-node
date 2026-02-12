@@ -3,7 +3,7 @@ import type { Gym } from "generated/prisma/client.js";
 
 
 interface CreateGymServiceParams {
-    tittle: string;
+    title: string;
     description: string | null;
     phone: string | null;
     latitude: number;
@@ -17,16 +17,15 @@ export class CreateGymService {
     constructor(private gymsRepository: GymsRepository) { }
 
 
-    async execute({ tittle, description, phone, latitude, longitude }: CreateGymServiceParams): Promise<CreateGymServiceResponse> {
+    async execute({ title, description, phone, latitude, longitude }: CreateGymServiceParams): Promise<CreateGymServiceResponse> {
 
         const gym = await this.gymsRepository.create({
-            tittle,
+            title,
             description,
             phone,
             latitude,
             longitude,
         })
-
         return { gym }
     }
 
