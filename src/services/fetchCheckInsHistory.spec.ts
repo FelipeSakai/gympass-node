@@ -1,7 +1,7 @@
 import { expect, describe, it, beforeEach } from "vitest";
 import { InMemoryCheckInsRepository } from "@/repositories/in-memory/inMemoryCheckIn.repository.js";
 
-import { fetchCheckInsHistory } from "./FetchcheckInsHistory.js";
+import { fetchCheckInsHistory } from "./fetchCheckInsHistory.service.js";
 
 let checkInRepository: InMemoryCheckInsRepository;
 let sut: fetchCheckInsHistory;
