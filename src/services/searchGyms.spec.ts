@@ -1,5 +1,4 @@
 import { expect, describe, it, beforeEach } from "vitest";
-import { InMemoryCheckInsRepository } from "@/repositories/in-memory/inMemoryCheckIn.repository.js";
 import { InMemoryGymRepository } from "@/repositories/in-memory/inMemoryGym.repository.js";
 import { SearchGymService } from "./searchGyms.service.js";
 
