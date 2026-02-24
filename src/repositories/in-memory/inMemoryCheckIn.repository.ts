@@ -7,6 +7,21 @@ import { is } from "zod/locales";
 
 export class InMemoryCheckInsRepository implements CheckInsRepository {
     public items: CheckIn[] = [];
+    async save(checkIn: CheckIn) {
+        const checkInIndex = this.items.findIndex((item) => item.id === checkIn.id);
+
+        if (checkInIndex >= 0) {
+            this.items[checkInIndex] = checkIn;
+        }
+        return checkIn;
+    }
+
+    async findById(id: string) {
+        const checkIn = this.items
+            .find((item) => item.id === id);
+        return checkIn || null;
+    }
+
     async findByUserIdOnDate(userId: string, date: Date) {
 
         const startOfTheDay = dayjs(date).startOf('date')
