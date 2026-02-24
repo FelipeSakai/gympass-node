@@ -1,9 +1,7 @@
 import type { CheckIn, Prisma } from "generated/prisma/client.js";
 import type { CheckInsRepository } from "../checkIns.repository.js";
 import { randomUUID } from "node:crypto";
-import { check } from "zod";
 import dayjs from "dayjs";
-import { is } from "zod/locales";
 
 export class InMemoryCheckInsRepository implements CheckInsRepository {
     public items: CheckIn[] = [];
