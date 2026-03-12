@@ -5,7 +5,7 @@ import z from "zod";
 
 export async function authenticateController(request: FastifyRequest, reply: FastifyReply) {
     const authenticateBodySchema = z.object({
-        email: z.email(),
+        email: z.string().email(),
         password: z.string().min(6),
     })
 
@@ -14,14 +14,19 @@ export async function authenticateController(request: FastifyRequest, reply: Fas
     try {
         const authenticateService = makeAuthenticateService();
 
-        await authenticateService.execute({ email, password });
+        const { user } = await authenticateService.execute({ email, password });
+        const token = await reply.jwtSign({}, {
+            sign: {
+                sub: user.id,
+            },
+        });
+
+        return reply.status(200).send({ token });
     } catch (err) {
         if (err instanceof InvalidCredentialsError) {
             return reply.status(400).send({ message: err.message });
         }
 
-        return err
+        throw err;
     }
-
-    return reply.status(200).send();
 }
