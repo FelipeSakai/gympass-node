@@ -1,18 +1,16 @@
-import { PrismaClient } from 'generated/prisma/client.js'
-import { PrismaPg } from '@prisma/adapter-pg'
-import { Pool } from 'pg'
-import { env } from '@/env/index.js'
+import { env } from "@/env/index.js";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "generated/prisma/client.js";
 
-const connectionString = env.DATABASE_URL
+export const schema =
+  new URL(env.DATABASE_URL).searchParams.get("schema") || "public";
 
-if (!connectionString) {
-    throw new Error('DATABASE_URL is not set')
-}
-
-const pool = new Pool({ connectionString })
-const adapter = new PrismaPg(pool)
+const adapter = new PrismaPg(
+  { connectionString: env.DATABASE_URL },
+  { schema },
+);
 
 export const prisma = new PrismaClient({
-    adapter,
-    log: env.NODE_ENV === 'dev' ? ['query'] : [],
-})
+  adapter,
+  log: env.NODE_ENV === "dev" ? ["query"] : [],
+});

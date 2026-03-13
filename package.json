@@ -7,7 +7,8 @@
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build --format esm",
-    "test": "vitest run",
+    "test": "vitest run --project unit",
+    "test:e2e": "vitest run --project e2e",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
@@ -20,15 +21,19 @@
     "@types/bcryptjs": "2.4.6",
     "@types/node": "^25.0.9",
     "@types/pg": "8.16.0",
-    "@vitest/coverage-v8": "4.0.18",
+    "@types/supertest": "7.2.0",
+    "@vitest/coverage-v8": "4.1.0",
+    "@vitest/ui": "4.1.0",
     "eslint": "8.57.1",
     "prettier": "3.8.1",
     "prisma": "7.3.0",
+    "supertest": "7.2.2",
     "tsup": "^8.5.1",
-    "tsx": "^4.21.0",
+    "tsx": "4.21.0",
     "typescript": "^5.9.3",
-    "vite-tsconfig-paths": "6.0.5",
-    "vitest": "4.0.18"
+    "vite": "8.0.0",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.0"
   },
   "dependencies": {
     "@fastify/jwt": "10.0.0",
