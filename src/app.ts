@@ -6,6 +6,9 @@ import { env } from "./env/index.js";
 import fastifyJwt from "@fastify/jwt";
 import { gymRoutes } from "./http/controllers/gyms/routes.js";
 import { checkInRoutes } from "./http/controllers/checkIns/routes.js";
+import fastifySwagger from "@fastify/swagger";
+import fastifySwaggerUi from "@fastify/swagger-ui";
+import { swaggerOptions, swaggerUiOptions } from "./docs/swagger.js";
 
 export const app = fastify();
 
@@ -21,6 +24,8 @@ app.register(fastifyJwt, {
 });
 
 app.register(fastifyCookie);
+app.register(fastifySwagger, swaggerOptions);
+app.register(fastifySwaggerUi, swaggerUiOptions);
 
 app.register(usersRoutes);
 app.register(gymRoutes);
