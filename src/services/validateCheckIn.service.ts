@@ -4,35 +4,37 @@ import { ResourceNotFoundError } from "./errors/resourceNotFound.error.js";
 import dayjs from "dayjs";
 
 interface ValidateCheckInServiceRequest {
-    checkInId: string;
+  checkInId: string;
 }
 
 interface ValidateCheckInServiceResponse {
-    checkIn: CheckIn
+  checkIn: CheckIn;
 }
 export class ValidateCheckInService {
-    constructor(
-        private checkInsRepository: CheckInsRepository,
-    ) { }
+  constructor(private checkInsRepository: CheckInsRepository) {}
 
-    async execute({ checkInId }: ValidateCheckInServiceRequest): Promise<ValidateCheckInServiceResponse> {
+  async execute({
+    checkInId,
+  }: ValidateCheckInServiceRequest): Promise<ValidateCheckInServiceResponse> {
+    const checkIn = await this.checkInsRepository.findById(checkInId);
 
-        const checkIn = await this.checkInsRepository.findById(checkInId);
-
-        if (!checkIn) {
-            throw new ResourceNotFoundError();
-        }
-
-        const distanceInMinutesFromCheckInCreation = dayjs(new Date()).diff(checkIn.created_at, 'minute');
-
-        if (distanceInMinutesFromCheckInCreation > 20) {
-            throw new ResourceNotFoundError();
-        }
-
-        checkIn.validated_at = new Date();
-
-        await this.checkInsRepository.save(checkIn);
-
-        return { checkIn };
+    if (!checkIn) {
+      throw new ResourceNotFoundError();
     }
+
+    const distanceInMinutesFromCheckInCreation = dayjs(new Date()).diff(
+      checkIn.created_at,
+      "minute",
+    );
+
+    if (distanceInMinutesFromCheckInCreation > 20) {
+      throw new ResourceNotFoundError();
+    }
+
+    checkIn.validated_at = new Date();
+
+    await this.checkInsRepository.save(checkIn);
+
+    return { checkIn };
+  }
 }

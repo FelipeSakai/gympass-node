@@ -2,21 +2,21 @@ import type { CheckIn } from "generated/prisma/client.ts";
 import type { CheckInsRepository } from "@/repositories/checkIns.repository.js";
 
 interface GetUserMetricsRequest {
-    userId: string;
+  userId: string;
 }
 
 interface GetUserMetricsResponse {
-    checkInsCount: number;
+  checkInsCount: number;
 }
 
 export class GetUserMetrics {
-    constructor(
-        private checkInsRepository: CheckInsRepository,
-    ) { }
+  constructor(private checkInsRepository: CheckInsRepository) {}
 
-    async execute({ userId }: GetUserMetricsRequest): Promise<GetUserMetricsResponse> {
-        const checkInsCount = await this.checkInsRepository.countByUserId(userId);
+  async execute({
+    userId,
+  }: GetUserMetricsRequest): Promise<GetUserMetricsResponse> {
+    const checkInsCount = await this.checkInsRepository.countByUserId(userId);
 
-        return { checkInsCount }
-    }
+    return { checkInsCount };
+  }
 }
