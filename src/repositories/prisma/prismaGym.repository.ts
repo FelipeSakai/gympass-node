@@ -1,4 +1,4 @@
-import type { Gym } from "generated/prisma/client.js";
+import type { Gym } from "generated/prisma/client.ts";
 import type { GymCreateInput } from "generated/prisma/models.js";
 import type {
   FindManyNearbyGymsParams,

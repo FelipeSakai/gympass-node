@@ -1,4 +1,4 @@
-import type { CheckIn } from "generated/prisma/client.js";
+import type { CheckIn } from "generated/prisma/client.ts";
 import type { CheckInsRepository } from "@/repositories/checkIns.repository.js";
 import type { GymsRepository } from "@/repositories/gym.repository.js";
 import { ResourceNotFoundError } from "./errors/resourceNotFound.error.js";

@@ -1,6 +1,6 @@
 import { env } from "@/env/index.js";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "generated/prisma/client.js";
+import { PrismaClient } from "generated/prisma/client.ts";
 
 export const schema =
   new URL(env.DATABASE_URL).searchParams.get("schema") || "public";

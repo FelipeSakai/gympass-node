@@ -1,4 +1,4 @@
-import type { CheckIn } from "generated/prisma/client.js";
+import type { CheckIn } from "generated/prisma/client.ts";
 import type { CheckInUncheckedCreateInput } from "generated/prisma/models.js";
 import type { CheckInsRepository } from "../checkIns.repository.js";
 import { prisma } from "../../lib/prisma.js";
